@@ -11,6 +11,6 @@ Same layout as [last year](https://github.com/ECDelmelle/30daymapping2025):
 
 | Day | Theme  | Map |
 |-----|--------|-----|
-| 1   | Points | Philadelphia 311 requests mentioning rats, mice or rodents |
+| 1   | Points | L&I Inspection Violations mentioning Rodents |
 
 Packages: tidyverse, sf, httr2, tigris, scales, showtext, sysfonts.
