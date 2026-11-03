@@ -155,7 +155,7 @@ ring   <- st_buffer(office, ring_r)
 # Try candidate spots on the ground (outside Philly, not in water) and pick
 # the one whose leader line crosses the fewest rodent dots. Override with
 # manual coordinates (EPSG:2272 feet) if you prefer: label_xy <- c(x, y)
-label_xy <- oxy[1, 1:2] + c(-18000, 14000)   # c(east/west, north/south), in feet
+label_xy <- oxy[1, 1:2] + c(-23000, 14000)   # c(east/west, north/south), in feet
 
 if (is.null(label_xy)) {
   view_land <- view |>
@@ -175,10 +175,11 @@ if (is.null(label_xy)) {
   message("Leader crosses ", hits[best], " dots")
 }
 
-# Leader runs from the ring edge to just short of the label
+
+# Leader runs from the top of the ring (12 o'clock) to just short of the label
 v     <- label_xy - oxy[1, 1:2]; u <- v / sqrt(sum(v^2))
-lead0 <- oxy[1, 1:2] + c(0, ring_r)   # top of the ring
-lead1 <- label_xy - u * 600
+lead0 <- oxy[1, 1:2] + c(0, ring_r + 150)
+lead1 <- label_xy + c(5600, 1100)   # just right of "office", mid-height
 lab_hjust <- if (u[1] < 0) 1 else 0
 
 # ---- Map: ground -> water -> figure -> data -> labels -----------------------
@@ -204,9 +205,9 @@ p <- ggplot() +
              colour = ed$alt),
     # curvature: 0 = straight; flip the sign to bend the other way
     annotate("curve", x = lead0[1], y = lead0[2],
-             xend = lead1[1], yend = lead1[2], curvature = -0.4,
+             xend = lead1[1], yend = lead1[2], curvature = 0.4,
              ncp = 10, colour = ed$alt, linewidth = 0.3),
-    annotate("text", x = label_xy[1]-100, y = label_xy[2]+1250,
+    annotate("text", x = label_xy[1], y = label_xy[2]+300,
              label = "+ one mouse,\nin my office", hjust = 0.5,
              vjust = 0, size = 3.3, family = ed_font, colour = ed$alt_dk,
              fontface = "bold", lineheight = 0.95)
