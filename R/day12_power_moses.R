@@ -218,7 +218,7 @@ if (!file.exists(green_file)) {
     tf <- sprintf("Data/osm_tiles_nyc/green_%d.rds", k)
     if (!file.exists(tf)) {
       message("green tile ", k, "/", length(tiles))
-      saveRDS(fetch_tile(st_bbox(tiles[k]), green_query, parse_green), tf)
+      saveRDS(fetch_tile(st_bbox(tiles[k]), green_query, parse = parse_green), tf)
     }
     parts[[tf]] <- readRDS(tf)
   }
